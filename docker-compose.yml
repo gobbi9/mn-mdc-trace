@@ -39,6 +39,18 @@ services:
       - "8099:8080"
     networks:
       - logging
+  mn-jaeger-fixed:
+    image: gobbi9/mn-mdc-trace:0.1-fixed
+    container_name: mn-jaeger-fixed
+    environment:
+      # this image tag only has jaeger configured
+      - tracing.jaeger.sender.endpoint=http://jaeger:14268/api/traces
+    depends_on:
+      - jaeger
+    ports:
+      - "8100:8080"
+    networks:
+      - logging
 
 networks:
   logging:
