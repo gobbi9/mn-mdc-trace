@@ -1,0 +1,45 @@
+services:
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    container_name: jaeger
+    ports:
+      - "6831:6831/udp"
+      - "16686:16686"
+      - "9411:9411"
+    environment:
+      - COLLECTOR_ZIPKIN_HOST_PORT=:9411
+    networks:
+      - logging
+  # to use a local build run ./gradlew dockerBuild and replace the "image:" line with
+  # build:
+  #   context: build/docker/main
+  mn-zipkin:
+    image: gobbi9/mn-mdc-trace:0.1
+    container_name: mn-zipkin
+    environment:
+      - tracing.zipkin.enabled=true
+      - tracing.jaeger.enabled=false
+      - tracing.zipkin.http.url=http://jaeger:9411
+    depends_on:
+      - jaeger
+    ports:
+      - "8098:8080"
+    networks:
+      - logging
+  mn-jaeger:
+    image: gobbi9/mn-mdc-trace:0.1
+    container_name: mn-jaeger
+    environment:
+      - tracing.zipkin.enabled=false
+      - tracing.jaeger.enabled=true
+      - tracing.jaeger.sender.endpoint=http://jaeger:14268/api/traces
+    depends_on:
+      - jaeger
+    ports:
+      - "8099:8080"
+    networks:
+      - logging
+
+networks:
+  logging:
+    name: logging

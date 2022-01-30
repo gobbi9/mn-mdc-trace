@@ -1,0 +1,21 @@
+micronaut:
+  application:
+    name: mn-
+netty:
+  default:
+    allocator:
+      max-order: 3
+tracing:
+  jaeger:
+    enabled: true
+    sender:
+      agentHost: localhost
+      agentPort: 6831
+    sampler:
+      probability: 1
+  zipkin:
+    enabled: false
+    sampler:
+      probability: 1
+    http:
+      url: http://localhost:9411
