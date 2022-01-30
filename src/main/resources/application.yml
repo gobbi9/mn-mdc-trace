@@ -1,6 +1,6 @@
 micronaut:
   application:
-    name: mn-
+    name: mn-mdc-trace
 netty:
   default:
     allocator:
