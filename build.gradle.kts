@@ -6,7 +6,7 @@ plugins {
     id("io.micronaut.application") version "3.2.0"
 }
 
-version = "0.1"
+version = "0.1-fixed"
 group = "com.example"
 
 repositories {
@@ -24,17 +24,13 @@ dependencies {
 
     implementation("io.github.microutils:kotlin-logging-jvm:2.1.20")
 
-    // why am I hardcoding the versions? see the issue
-    // https://github.com/micronaut-projects/micronaut-tracing/issues/19
-    implementation("io.micronaut:micronaut-tracing:3.2.7")
-
-    // zipkin
-    runtimeOnly("io.zipkin.brave:brave-instrumentation-http:5.13.7")
-    runtimeOnly("io.zipkin.reporter2:zipkin-reporter:2.16.3")
-    implementation("io.opentracing.brave:brave-opentracing:1.0.0")
+    // local jars from ./gradlew build in micronaut-tracing
+    // only tracing-jaeger was changed, tracing-core is a dependency
+    implementation(files("tracing-core-4.0.3-SNAPSHOT.jar"))
+    implementation(files("tracing-jaeger-4.0.3-SNAPSHOT.jar"))
 
     // jaeger
-    runtimeOnly("io.jaegertracing:jaeger-thrift:1.8.0")
+    implementation("io.jaegertracing:jaeger-thrift:1.8.0")
 
 }
 

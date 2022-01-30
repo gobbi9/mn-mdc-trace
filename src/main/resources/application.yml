@@ -13,9 +13,3 @@ tracing:
       agentPort: 6831
     sampler:
       probability: 1
-  zipkin:
-    enabled: false
-    sampler:
-      probability: 1
-    http:
-      url: http://localhost:9411
