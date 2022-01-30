@@ -34,7 +34,7 @@ dependencies {
     implementation("io.opentracing.brave:brave-opentracing:1.0.0")
 
     // jaeger
-    runtimeOnly("io.jaegertracing:jaeger-thrift:1.8.0")
+    implementation("io.jaegertracing:jaeger-thrift:1.8.0")
 
 }
 
