@@ -1,4 +1,4 @@
-## Reproducer for missing traceId and spanId MDC with Jaeger
+## Reproducer for missing traceId and spanId MDC with Jaeger + Micronaut
 
 ### Instructions
 
